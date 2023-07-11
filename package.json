@@ -1,15 +1,19 @@
 {
-  "name": "jekyll-firewall",
+  "name": "demagh8-wiki",
   "version": "0.0.1",
   "author": "Lillian Chen",
   "description": "Password protect Jekyll posts",
-  "repository": "http://lily.work/jekyll-firewall/",
+  "repository": "https://demagh8.github.io",
   "devDependencies": {
     "crypto-js": "^3.1.9-1",
     "fs": "0.0.1-security",
-    "gulp": "^3.9.1",
-    "gulp-util": "^3.0.8",
-    "marked": "^0.3.19",
+    "gulp": "^4.0.2",
+    "gulp-util": "^1.0.0",
+    "marked": "^5.1.1",
     "through2": "^2.0.3"
+  },
+  "dependencies": {
+    "del": "^7.0.0",
+    "graceful-fs": "^4.2.11"
   }
 }

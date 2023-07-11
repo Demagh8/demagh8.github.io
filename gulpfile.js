@@ -4,7 +4,7 @@ var gulp          = require('gulp');
 var gutil         = require('gulp-util');
 
 var cryptojs      = require('crypto-js');
-var marked        = require('marked');
+var { marked }    = require('marked');
 var FileSystem    = require('fs');
 var through       = require('through2');
 var PluginError   = gutil.PluginError;
