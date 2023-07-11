@@ -10,7 +10,7 @@ var through       = require('through2');
 var PluginError   = gutil.PluginError;
 
 /*
-  START FIREWALL TASKS
+  START wiki TASKS
 */
 function checkEncryptedLayout(frontMatter, filepath) {
   var lines = frontMatter.split('\n'),
@@ -88,23 +88,27 @@ function encrypt(password) {
   });
 }
 
-gulp.task('firewall:encrypt', () => {
-  return gulp.src('_protected/*.*')
-    .pipe(encrypt('password'))
-    .pipe(gulp.dest('_posts'));
+gulp.task('wiki:encrypt', () => {
+  if (process.env.WIKIPASS){
+	  return gulp.src('_protected/*.*')
+	    .pipe(encrypt(process.env.WIKIPASS))
+	    .pipe(gulp.dest('_posts'));
+  } else {
+          console.log('Missing password! Usage: WIKIPASS=MYPASS gulp wiki:encrypt');
+  }
 });
 
-gulp.task('firewall:watch', () => {
-  gulp.watch('_protected/*.*', gulp.series('firewall:encrypt'));
+gulp.task('wiki:watch', () => {
+  gulp.watch('_protected/*.*', gulp.series('wiki:encrypt'));
 });
 
-gulp.task('firewall', gulp.series('firewall:encrypt', 'firewall:watch',() => {}));
+gulp.task('wiki', gulp.series('wiki:encrypt', 'wiki:watch',() => {}));
 
 
 /*
-  END FIREWALL TASKS
+  END wiki TASKS
 */
 
-gulp.task('default', gulp.series('firewall', () => {
+gulp.task('default', gulp.series('wiki', () => {
   // your tasks here
 }));
