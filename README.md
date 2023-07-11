@@ -1,46 +1,23 @@
-# jekyll-firewall
-Password protect Jekyll posts.
+# <img src="https://avatars.githubusercontent.com/u/106743612" alt="logo" style="height: 35px;"/> Demagh8 Wiki
 
-![Demo](https://github.com/lllychen/jekyll-firewall/blob/master/demo.gif)
-
-## Disclaimers
-Before using, keep the following in mind:
-
-- This encryption type is weak against brute force attacks. [Here](https://github.com/lllychen/jekyll-firewall/pull/3/commits/038ce8e143d1749375137589fca8e1401a82f4bf) is an example of a safe guard by [mrlubos](https://github.com/mrlubos).
-- Liquid templating isn't currently supported in protected posts
-- Use only Markdown syntax supported by [marked](https://marked.js.org)
-- The password needs to be entered for each protected post. But you can easily store a successful password in cache and bypass subsequent logins
-- I discourage storing your site in a public repository unless you are okay with gitignoring sensitive information (and have no remote backup)
-
-## Installation
-To begin a new site, build on top of this repository by forking or cloning.
-
-To integrate with an existing Jekyll site, below are the necessary files:
-- `_layouts/encrypted` &mdash; The layout for a locked page
-- `gulpfile` &mdash; The Gulp file to encrypt posts
+Password protect Jekyll posts. Forked from [lilykonings](https://github.com/lilykonings/jekyll-password-protect).
+Visit [my Wiki here!](https://demagh8.github.io)
 
 ## Usage
-### Site Structure &amp; Password
-The `encrypt` gulp task (below) encrypts each file in `SRC-FOLDER` with `PASSWORD` and outputs it into `DEST-FOLDER`. Change these settings in `gulpfile.js` according to your site structure.
+### Unencrypted Posts
+Just add a markdown file to ``_posts``. The markdown will be public in github
 
-``` js
-gulp.task('encrypt', () => {
-  return gulp.src('SRC-FOLDER')
-    .pipe(encrypt('PASSWORD'))
-    .pipe(gulp.dest('DEST-FOLDER'));
-});
+### Encrypted Posts
+Just add a normal post to ``_protected`` then encrypt it using
+```bash
+WIKIPASS=mypass gulp wiki:encrypt
 ```
+Gulp will simply encrypt your markdown post and create an encrypted version in ```_posts```.
 
-Heads up that if you write public posts to `DEST-FOLDER`, it may be difficult to distinguish the public and protected posts. This can be easily amended but is outside the scope of the skeleton site in this repo. However, you can adjust the gulp `encrypt` task to change the outputted filename of protected files in the `DEST-FOLDER` and set the url in the front matter.
+*Important notes*:
 
-### Protect Posts
-To encrypt a post, simply save it in your desinated `SRC-FOLDER` and run `gulp`.
-
-## Credit
-### Libraries
-- [cryptojs](https://github.com/brix/crypto-js)
-- [markedjs](https://github.com/markedjs/marked)
-
-### Contributors
-- [mrlubos](https://github.com/mrlubos)
-- [Firefox2100](https://github.com/Firefox2100)
+* files in ``_protected`` will be git ignored. It's your responsibility to backup
+* gulp will re-encrypt all protected posts every run. If you change the ``mypass``, it will affect older/existing posts
+* To workaround the above issue, and add extra secrecy, you may delete ``_protected`` posts once encrypted
+* To edit an encrypted ``_posts`` later, simply inspect the ``<article>`` element, and [convert it to markdown](https://codebeautify.org/html-to-markdown)
+* Liquid templating isn't currently supported in protected posts, use only Markdown syntax supported by [marked](https://marked.js.org/)

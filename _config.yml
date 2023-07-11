@@ -17,7 +17,7 @@ title: Demagh8-Wiki
 email: demagh@pm.me
 description: > # this means to ignore newlines until "baseurl:"
   A personal secret wiki to satisfy my internal angers. I keep my thoughts structured for my future self. 
-  No one is ment to read what's within ;-)
+  No one is ment to read within ;-)
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: elonmusk
